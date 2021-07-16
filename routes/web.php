@@ -1,5 +1,6 @@
 <?php
 
+use App\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MainController@shopMenu')->name('shop');
+Route::get('/add_to_cart/{id}', 'MainController@addToCart')->name('addToCart');
+Route::get('/cart', 'MainController@viewCart')->name('viewCart');
+Route::post('/order', 'MainController@createOrder')->name('order');
 
 Auth::routes();
 

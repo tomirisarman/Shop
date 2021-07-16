@@ -15,6 +15,19 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
+                        @if($orders = Auth::user()->orders)
+                            @foreach($orders as $order)
+                                <h3 class="alert-success">Order number - {{$order->id}}</h3>
+                                @foreach($order->items as $item)
+                                    <p><b>{{$item->product->name}}</b></p>
+                                    <p>Кол-во: {{$item->quantity}}</p>
+                                @endforeach
+                                <hr>
+                            @endforeach
+                        @else
+                            Здесь будут ваши заказы
+                        @endif
                 </div>
             </div>
         </div>
