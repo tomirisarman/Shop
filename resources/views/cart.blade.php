@@ -20,12 +20,17 @@
                                 <hr>
                             @endforeach
                             <h4 style="text-align: right;">Общая сумма: {{$sum}}</h4>
+                            @if(\Illuminate\Support\Facades\Auth::check())
                                 <form method="post" action="{{route('order')}}">
                                     @csrf
                                     <label for="address">Куда доставить: </label>
                                     <input type="text" name="address">
                                     <input type="submit" class="btn btn-primary" value="Заказать">
                                 </form>
+                            @else
+                                    <a href="{{route('redirLogReg', 1)}}">Войдите для заказа</a>
+                                    <a href="{{route('redirLogReg', 0)}}">Еще нет аккаунта?</a>
+                            @endif
                         @endif
                     </div>
                 </div>

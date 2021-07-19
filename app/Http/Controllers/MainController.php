@@ -66,12 +66,11 @@ class MainController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
-    public function createOrder(Request $request){
+    public function createOrder(Request $request, $hasAccount = null){
         if(!Auth::check()){
-            //session()->put('url.intended', url()->previous());
+            session()->put('url.intended', url()->previous());
             return view('auth.login');
         }
-
         $order = new Order;
         $order->user_id = Auth::id();
         $order->address = $request->address;
@@ -87,5 +86,17 @@ class MainController extends Controller
         }
         session()->forget('cart');
         return view('home');
+    }
+
+    public function redirectLoginRegister($hasAccount){
+        if($hasAccount == True){
+            session()->put('url.intended', url()->previous());
+            return view('auth.login');
+        }elseif ($hasAccount == False){
+            session()->put('url.intended', url()->previous());
+            return view('auth.register');
+        }else{
+            return redirect()->back();
+        }
     }
 }

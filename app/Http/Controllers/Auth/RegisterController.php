@@ -30,7 +30,13 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-
+    protected function redirectTo()
+    {
+        if(session()->has('url.intended')){
+            return session()->get('url.intended');
+        }
+        return url()->previous();
+    }
     /**
      * Create a new controller instance.
      *
