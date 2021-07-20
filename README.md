@@ -7,8 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-Админка: Voyager.
-Стркутура БД:
+<h3>Админка: Voyager</h3>
+<h3>Стркутура БД:</h3>
+<img src="Shop DB.jpeg" width="300px">
 
 
 
