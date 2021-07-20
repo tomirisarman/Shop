@@ -9,7 +9,7 @@
 
 <h3>Админка: Voyager</h3>
 <h3>Стркутура БД:</h3>
-<img src="Shop DB.jpeg" width="300px">
+<img src="Shop DB.jpeg" width="600px">
 
 
 
