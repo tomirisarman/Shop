@@ -8,6 +8,11 @@
                     <div class="card-header">{{ __('Dashboard') }}</div>
 
                     <div class="card-body">
+                        @if(session()->has('success'))
+                            <div class="alert alert-success" onclick="$(this).hide('1000')">
+                                {{ session()->get('success') }}
+                            </div>
+                        @endif
                         <div class="tree">
                             @foreach($parentCats as $par)
                                 <p>{{ $par->name }}</p>
@@ -21,6 +26,8 @@
             </div>
         </div>
     </div>
+
 @endsection
+
 
 

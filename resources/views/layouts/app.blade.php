@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}" ></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -70,7 +71,7 @@
                             </li>
                         @endguest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('viewCart')}}">{{ __('Корзина') }} ({{ session()->get('cart')? count(session()->get('cart')) : '0'}})</a>
+                            <a class="nav-link" href="{{route('viewCart')}}">{{ __('Корзина') }} ({{ session()->get('cart')? session()->get('cart_quantity') : '0'}})</a>
                         </li>
                     </ul>
                 </div>

@@ -44,9 +44,16 @@ class MainController extends Controller
                     "price" => $product->price,
                 ]
             ];
+            session()->put('cart_quantity', 1);
             session()->put('cart', $cart);
             return redirect()->back()->with('success', 'Product added to cart successfully!');
         }
+
+        $cart_quantity = 1;
+        foreach ($cart as $item){
+            $cart_quantity += $item['quantity'];
+        }
+        session()->put('cart_quantity', $cart_quantity);
 
         // if cart not empty then check if this product exist then increment quantity
         if(isset($cart[$id])) {
@@ -64,6 +71,32 @@ class MainController extends Controller
 
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
+    public function removeFromCart($id){
+        $product = Product::find($id);
+        if(!$product) {
+            abort(404);
+        }
+        $cart = session()->get('cart');
+
+        // if cart not empty then check if this product exist
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']--;
+            if($cart[$id]['quantity'] <= 0){
+                unset($cart[$id]);
+            }
+            session()->put('cart', $cart);
+
+            $cart_quantity = 0;
+            foreach ($cart as $item){
+                $cart_quantity += $item['quantity'];
+            }
+            session()->put('cart_quantity', $cart_quantity);
+
+            return redirect()->back()->with('success', 'Product removed from cart successfully!');
+        }
+
+        return redirect()->back()->with('success', 'There is no such product in the cart yet');
     }
 
     public function createOrder(Request $request, $hasAccount = null){

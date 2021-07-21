@@ -1,6 +1,6 @@
 @foreach($subcategories as $subcategory)
     <ul>
-        <li onclick="$('#{{$subcategory->id}}').toggle()">{{$subcategory->name}}</li>
+        <li style="cursor: pointer" onclick="$('#{{$subcategory->id}}').toggle()">{{$subcategory->name}}</li>
         @if(count($subcategory->products))
             <ul type="none" id="{{$subcategory->id}}">
                 @foreach($subcategory->products as $prod)
@@ -13,9 +13,10 @@
 {{--                        <input type="hidden" name="prod_id" value="{{$prod->id}}">
                                <input class="btn btn-primary" type="submit" value="В корзину">
 --}}
-                    <a href="{{route('addToCart', $prod->id)}}">В корзину</a>
-
-                    </form>
+                    @if(session()->has('cart') && array_key_exists($prod->id, session()->get('cart')))
+                        <a href="{{route('removeFromCart', $prod->id)}}">Удалить из корзины</a>
+                    @endif
+                        <a href="{{route('addToCart', $prod->id)}}">В корзину</a>
                 @endforeach
             </ul>
         @endif
